@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block script %}
+    <script src="/static/index.js"></script>
+{% endblock %}
+
+{% block title %}
+    Main
+{% endblock %}
+
+{% block main %}
+  
+<main class="container py-5 text-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-start">Title</th>
+                <th class="text-start">Year</th>
+                <th class="text-end">Type</th>
+                <th class="text-end">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                          Filter
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li class="canoncheck">
+                            <input class="form-check-input" type="checkbox" value="" id="onlycanon">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Only canon
+                            </label>
+                        </li>
+                          <li><button id="tvs" class="dropdown-item" type="button">TVs</button></li>
+                          <li><button id="movies" class="dropdown-item" type="button">Movies</button></li>
+                          <li><button id="specials" class="dropdown-item" type="button">Specials</button></li>
+                          <li><button id="ovas" class="dropdown-item" type="button">OVAs</button></li>
+                          <li><button id="all" class="dropdown-item" type="button">All</button></li>
+                        </ul>
+                      </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+            {% for row in data %}
+            <tr class="{{ row.type }}canon{{ row.canon }} {{ row.type }} canon{{ row.canon }} trow">
+                <td class="text-start">{{ row.title }}</td>
+                <td class="text-start">{{ row.year }}</td>
+                <td class="text-end">{{ row.type }}</td>
+                <td class="text-end"> 
+                    <form method="post">
+                    <button name="submit_button" value="favorite{{ row.id }}" type="submit" class="btn btn-default" aria-label="favorite">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                    <button name="submit_button" value="watching{{ row.id }}" type="submit" class="btn btn-default" aria-label="watching">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button name="submit_button" value="complete{{ row.id }}" type="submit" class="btn btn-default" aria-label="done">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

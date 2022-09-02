@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block script %}
+    <script src="/static/register.js"></script>
+{% endblock %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+    login
+    <form id="login_form" action="/login" method="post">
+        <div>
+            <input id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div>
+            <input id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <div id="infodiv"></div>
+{% endblock %}
